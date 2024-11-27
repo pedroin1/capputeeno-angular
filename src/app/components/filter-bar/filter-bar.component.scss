@@ -1,0 +1,38 @@
+@import "../../../scss/mixins/flex";
+@import "../../../scss/index";
+
+:host {
+  display: flex;
+  margin-top: 12px;
+  width: 100%;
+  padding: 0 64px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list_itens {
+  list-style: none;
+  @include flex-custom(row, flex-start, center, 40px, wrap);
+
+  li {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    text-transform: uppercase;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+  }
+
+  .item-list-selected {
+    font-weight: 600;
+    border-bottom: 4px solid var(--selected-color);
+  }
+}
+
+.organize_for {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}

@@ -1,0 +1,14 @@
+<ul class="list_itens">
+  @for (item of typesItens; track $index) {
+  <li
+    [ngClass]="{ 'item-list-selected': item.selected }"
+    (click)="onToogleItem(item)"
+  >
+    {{ item.name }}
+  </li>
+  }
+</ul>
+<div class="organize_for">
+  <p>Selecionar por</p>
+  <img src="assets/svg/arrow-down.svg" alt="" />
+</div>
