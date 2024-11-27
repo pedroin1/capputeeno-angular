@@ -3,10 +3,11 @@
 
 :host {
   display: flex;
-  margin-top: 12px;
+  margin-top: 24px;
   width: 100%;
+  height: fit-content;
   padding: 0 64px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -29,10 +30,38 @@
   }
 }
 
+.right_menu_filter {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
 .organize_for {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
   cursor: pointer;
+
+  p {
+    color: var(--primary);
+  }
+}
+
+.pagination_filter {
+  margin-top: 32px;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--primary);
+    background-color: var(--primary-light-2);
+  }
 }
