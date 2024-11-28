@@ -6,8 +6,13 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { FilterService, ItemProp } from '../../services/filter.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  FilterService,
+  IOrganizeFor,
+  IPage,
+  IProduct,
+  OrganizeForType,
+} from '../../services/filter.service';
 
 @Component({
   selector: 'app-filter-bar',
@@ -18,22 +23,40 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterBarComponent implements OnInit {
-  typesItens: ItemProp[] = [];
-  selectedItem: ItemProp | null = null;
-  filterService = inject(FilterService);
-  destroyRef = inject(DestroyRef);
+  productItems: IProduct[] = [];
+  organizeForItems: IOrganizeFor[] = [];
+  paginationItems: IPage[] = [];
+  isOpenMenu: boolean = false;
 
-  onToogleItem(item: ItemProp) {
-    this.filterService.toggleItem(item);
+  constructor(
+    private destroyRef: DestroyRef,
+    private filterService: FilterService
+  ) {}
+
+  public openMenu() {
+    this.isOpenMenu = !this.isOpenMenu;
+  }
+
+  public closeMenu() {
+    this.isOpenMenu = false;
+  }
+
+  public onToogleProduct(item: IProduct) {
+    this.filterService.toggleProduct(item);
+    this.closeMenu();
+  }
+  public onToogleOrganizeFor(item: IOrganizeFor) {
+    this.filterService.toggleOrganizeFor(item);
+    this.closeMenu();
+  }
+  public onTooglePage(item: IPage) {
+    this.filterService.togglePage(item);
+    this.closeMenu();
   }
 
   ngOnInit(): void {
-    this.typesItens = this.filterService.getItems();
-
-    this.filterService.selectedItem$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((item) => {
-        this.selectedItem = item;
-      });
+    this.productItems = this.filterService.getProductItems();
+    this.organizeForItems = this.filterService.getOrganizeForItems();
+    this.paginationItems = this.filterService.getPaginationItems();
   }
 }
