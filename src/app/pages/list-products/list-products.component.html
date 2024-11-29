@@ -1,1 +1,8 @@
-<app-filter-bar></app-filter-bar> lista de itens
+<app-filter-bar></app-filter-bar>
+<section class="products_card_grid">
+  <ul>
+    @for (item of list; track $index) {
+    <li>{{ item.name }}</li>
+    }
+  </ul>
+</section>
