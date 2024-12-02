@@ -9,11 +9,12 @@ import { FilterBarComponent } from '../../components/filter-bar/filter-bar.compo
 import { IProduct, ProductService } from '../../services/product.service';
 import { JsonPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CardProductComponent } from '../../components/card-product/card-product.component';
 
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [FilterBarComponent],
+  imports: [FilterBarComponent, CardProductComponent],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

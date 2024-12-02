@@ -1,8 +1,8 @@
 <app-filter-bar></app-filter-bar>
-<section class="products_card_grid">
-  <ul>
+<section>
+  <ul class="products_card_grid">
     @for (product of productList; track product.id) {
-    <li>{{ product.name }}</li>
+    <app-card-product [product]="product" />
     }
   </ul>
 </section>

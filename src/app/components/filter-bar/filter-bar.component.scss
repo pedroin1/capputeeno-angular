@@ -5,7 +5,7 @@
   margin-top: 24px;
   width: 100%;
   height: fit-content;
-  padding: 0 64px;
+
   @include flex-custom(row, space-between, flex-start);
 }
 
