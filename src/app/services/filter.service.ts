@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FilterService {
-  private productTypes: IProduct[] = [
+  private productTypes: IProductFilter[] = [
     { name: 'Todos os Produtos', type: 'ALL', selected: true },
     { name: 'Camisas', type: 'SHIRT', selected: false },
     { name: 'Canecas', type: 'MUG', selected: false },
   ];
 
-  private organizeForTypes: IOrganizeFor[] = [
+  private organizeForTypes: IOrganizeForFilter[] = [
     { name: 'Novidades', type: 'NEWS', selected: true },
     { name: 'Preco Menor - Maior', type: 'LOW_PRICE', selected: false },
     { name: 'Preco Maior - Menor', type: 'HIGH_PRICE', selected: false },
     { name: 'Mais Vendidos', type: 'MOST_SELL', selected: false },
   ];
 
-  private paginationOrder: IPage[] = [
+  private paginationOrder: IPageFilter[] = [
     { page: '1', selected: true },
     { page: '2', selected: false },
     { page: '3', selected: false },
@@ -28,17 +28,19 @@ export class FilterService {
     { page: '>', selected: false },
   ];
 
-  private _selectedProduct$ = new BehaviorSubject<IProduct>(
+  private _selectedProduct$ = new BehaviorSubject<IProductFilter>(
     this.productTypes[0]
   );
   public selectedProduct$ = this._selectedProduct$.asObservable();
 
-  private _selectedOrganizeFor$ = new BehaviorSubject<IOrganizeFor>(
+  private _selectedOrganizeFor$ = new BehaviorSubject<IOrganizeForFilter>(
     this.organizeForTypes[0]
   );
   public selectedOrganizeFor$ = this._selectedOrganizeFor$.asObservable();
 
-  private _selectedPage$ = new BehaviorSubject<IPage>(this.paginationOrder[0]);
+  private _selectedPage$ = new BehaviorSubject<IPageFilter>(
+    this.paginationOrder[0]
+  );
   public selectedPage$ = this._selectedPage$.asObservable();
 
   public getProductItems() {
@@ -51,7 +53,7 @@ export class FilterService {
     return this.paginationOrder;
   }
 
-  public toggleProduct(selectedProduct: IProduct) {
+  public toggleProduct(selectedProduct: IProductFilter) {
     this.productTypes.forEach((item) => {
       item.selected = item.type === selectedProduct.type;
 
@@ -60,7 +62,7 @@ export class FilterService {
       }
     });
   }
-  public toggleOrganizeFor(selectedOrganizeFor: IOrganizeFor) {
+  public toggleOrganizeFor(selectedOrganizeFor: IOrganizeForFilter) {
     this.organizeForTypes.forEach((item) => {
       item.selected = item.type === selectedOrganizeFor.type;
 
@@ -69,7 +71,7 @@ export class FilterService {
       }
     });
   }
-  public togglePage(selectedPage: IPage) {
+  public togglePage(selectedPage: IPageFilter) {
     this.paginationOrder.forEach((item) => {
       item.selected = item.page === selectedPage.page;
 
@@ -79,19 +81,19 @@ export class FilterService {
     });
   }
 }
-export interface IProduct {
+export interface IProductFilter {
   name: string;
   type: ProductType;
   selected: boolean;
 }
 
-export interface IOrganizeFor {
+export interface IOrganizeForFilter {
   name: string;
   type: OrganizeForType;
   selected: boolean;
 }
 
-export interface IPage {
+export interface IPageFilter {
   page: string;
   selected: boolean;
 }

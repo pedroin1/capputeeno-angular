@@ -8,9 +8,9 @@ import {
 } from '@angular/core';
 import {
   FilterService,
-  IOrganizeFor,
-  IPage,
-  IProduct,
+  IOrganizeForFilter,
+  IPageFilter,
+  IProductFilter,
   OrganizeForType,
 } from '../../services/filter.service';
 
@@ -23,9 +23,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterBarComponent implements OnInit {
-  productItems: IProduct[] = [];
-  organizeForItems: IOrganizeFor[] = [];
-  paginationItems: IPage[] = [];
+  productItems: IProductFilter[] = [];
+  organizeForItems: IOrganizeForFilter[] = [];
+  paginationItems: IPageFilter[] = [];
   isOpenMenu: boolean = false;
 
   constructor(
@@ -41,15 +41,15 @@ export class FilterBarComponent implements OnInit {
     this.isOpenMenu = false;
   }
 
-  public onToogleProduct(item: IProduct) {
+  public onToogleProduct(item: IProductFilter) {
     this.filterService.toggleProduct(item);
     this.closeMenu();
   }
-  public onToogleOrganizeFor(item: IOrganizeFor) {
+  public onToogleOrganizeFor(item: IOrganizeForFilter) {
     this.filterService.toggleOrganizeFor(item);
     this.closeMenu();
   }
-  public onTooglePage(item: IPage) {
+  public onTooglePage(item: IPageFilter) {
     this.filterService.togglePage(item);
     this.closeMenu();
   }

@@ -6,20 +6,20 @@ import {
   OnInit,
 } from '@angular/core';
 import { FilterBarComponent } from '../../components/filter-bar/filter-bar.component';
-import { ProductService } from '../../services/product.service';
+import { IProduct, ProductService } from '../../services/product.service';
 import { JsonPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [FilterBarComponent, JsonPipe],
+  imports: [FilterBarComponent],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListProductsComponent implements OnInit {
-  list: any = [];
+  productList: IProduct[] = [];
 
   constructor(
     private productService: ProductService,
@@ -30,10 +30,9 @@ export class ListProductsComponent implements OnInit {
   ngOnInit(): void {
     this.productService
       .GetProducts()
-      .valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((data) => {
-        //@ts-ignore
-        this.list = data.data.allProducts;
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result) => {
+        this.productList = result.data.allProducts;
         this.changeDetectorRef.detectChanges();
       });
   }
