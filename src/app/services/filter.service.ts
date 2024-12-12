@@ -10,8 +10,8 @@ import { IPageFilter } from '../entities/page-filter';
 export class FilterService {
   private productTypes: IProductFilter[] = [
     { name: 'Todos os Produtos', type: 'ALL', selected: true },
-    { name: 'Camisas', type: 'SHIRT', selected: false },
-    { name: 'Canecas', type: 'MUG', selected: false },
+    { name: 'Camisas', type: 'T-SHIRTS', selected: false },
+    { name: 'Canecas', type: 'MUGS', selected: false },
   ];
 
   private organizeForTypes: IOrganizeForFilter[] = [

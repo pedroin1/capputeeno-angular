@@ -1,1 +1,1 @@
-export type ProductType = 'ALL' | 'SHIRT' | 'MUG';
+export type ProductType = 'ALL' | 'T-SHIRTS' | 'MUGS';

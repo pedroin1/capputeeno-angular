@@ -10,6 +10,8 @@ import { ProductService } from '../../services/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CardProductComponent } from '../../components/card-product/card-product.component';
 import { IProduct } from '../../entities/product';
+import { ProductType } from '../../entities/product-type';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-list-products',
@@ -24,17 +26,29 @@ export class ListProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private filterService: FilterService,
     private changeDetectorRef: ChangeDetectorRef,
     private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
-    this.productService
-      .GetProducts()
+    this.filterService.selectedProduct$
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        this.productList = result.data.allProducts;
-        this.changeDetectorRef.detectChanges();
+      .subscribe((filter) => {
+        if (filter.type === 'ALL') {
+          this.productService.GetProducts().subscribe((result) => {
+            this.productList = result.data.allProducts;
+            this.changeDetectorRef.detectChanges();
+          });
+        } else {
+          this.productService
+            .GetProductsWithFilter(filter.type)
+            .subscribe((result) => {
+              this.productList = result.data.allProducts;
+              this.changeDetectorRef.detectChanges();
+            });
+        }
+        this.changeDetectorRef.markForCheck();
       });
   }
 }
