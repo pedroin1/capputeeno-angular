@@ -9,9 +9,9 @@
   />
   <div class="card_product__info">
     <span class="card_product__info__title">{{ product.name }}</span>
-    <span class="card_product__info__price"
-      >RS {{ product.price_in_cents }}</span
-    >
+    <span class="card_product__info__price">{{
+      product.price_in_cents | currency : "BRL" | replace : "R$" : "R$ "
+    }}</span>
   </div>
 </div>
 }
