@@ -16,8 +16,8 @@ export class FilterService {
 
   private organizeForTypes: IOrganizeForFilter[] = [
     { name: 'Novidades', type: 'NEWS', selected: true },
-    { name: 'Preco Menor - Maior', type: 'LOW_PRICE', selected: false },
-    { name: 'Preco Maior - Menor', type: 'HIGH_PRICE', selected: false },
+    { name: 'Preco Menor - Maior', type: 'MINOR_PRICE', selected: false },
+    { name: 'Preco Maior - Menor', type: 'BIGGEST_PRICE', selected: false },
     { name: 'Mais Vendidos', type: 'MOST_SELL', selected: false },
   ];
 

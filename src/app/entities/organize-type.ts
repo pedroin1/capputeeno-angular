@@ -1,1 +1,5 @@
-export type OrganizeForType = 'NEWS' | 'LOW_PRICE' | 'HIGH_PRICE' | 'MOST_SELL';
+export type OrganizeForType =
+  | 'NEWS'
+  | 'MINOR_PRICE'
+  | 'BIGGEST_PRICE'
+  | 'MOST_SELL';
