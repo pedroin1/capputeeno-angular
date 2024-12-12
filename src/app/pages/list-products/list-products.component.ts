@@ -6,10 +6,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { FilterBarComponent } from '../../components/filter-bar/filter-bar.component';
-import { IProduct, ProductService } from '../../services/product.service';
-import { JsonPipe } from '@angular/common';
+import { ProductService } from '../../services/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CardProductComponent } from '../../components/card-product/card-product.component';
+import { IProduct } from '../../entities/product';
 
 @Component({
   selector: 'app-list-products',

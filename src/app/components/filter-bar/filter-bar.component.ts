@@ -3,16 +3,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  inject,
   OnInit,
 } from '@angular/core';
-import {
-  FilterService,
-  IOrganizeForFilter,
-  IPageFilter,
-  IProductFilter,
-  OrganizeForType,
-} from '../../services/filter.service';
+import { FilterService } from '../../services/filter.service';
+import { IProductFilter } from '../../entities/product-filter';
+import { IOrganizeForFilter } from '../../entities/organize-filter';
+import { IPageFilter } from '../../entities/page-filter';
 
 @Component({
   selector: 'app-filter-bar',

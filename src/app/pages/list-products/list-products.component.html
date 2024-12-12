@@ -3,6 +3,8 @@
   <ul class="products_card_grid">
     @for (product of productList; track product.id) {
     <app-card-product [product]="product" />
+    } @empty {
+    <li>Sem itens...</li>
     }
   </ul>
 </section>

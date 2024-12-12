@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApolloQueryResult } from '@apollo/client/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Observable } from 'rxjs';
+import { ProductQueryResult } from '../entities/product-query';
+import { IProduct } from '../entities/product';
 
 const GET_PRODUCTS = gql`
   query {
@@ -23,13 +25,4 @@ export class ProductService {
       query: GET_PRODUCTS,
     }).valueChanges;
   }
-}
-
-export type ProductQueryResult = ApolloQueryResult<{ allProducts: IProduct[] }>;
-
-export interface IProduct {
-  id: string;
-  name: string;
-  price_in_cents: number;
-  image_url: string;
 }

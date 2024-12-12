@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { IProductFilter } from '../entities/product-filter';
+import { IOrganizeForFilter } from '../entities/organize-filter';
+import { IPageFilter } from '../entities/page-filter';
 
 @Injectable({
   providedIn: 'root',
@@ -81,22 +84,3 @@ export class FilterService {
     });
   }
 }
-export interface IProductFilter {
-  name: string;
-  type: ProductType;
-  selected: boolean;
-}
-
-export interface IOrganizeForFilter {
-  name: string;
-  type: OrganizeForType;
-  selected: boolean;
-}
-
-export interface IPageFilter {
-  page: string;
-  selected: boolean;
-}
-
-export type ProductType = 'ALL' | 'SHIRT' | 'MUG';
-export type OrganizeForType = 'NEWS' | 'LOW_PRICE' | 'HIGH_PRICE' | 'MOST_SELL';
