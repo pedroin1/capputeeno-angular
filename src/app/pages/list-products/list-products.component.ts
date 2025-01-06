@@ -10,7 +10,6 @@ import { ProductService } from '../../services/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CardProductComponent } from '../../components/card-product/card-product.component';
 import { IProduct } from '../../entities/product';
-import { ProductType } from '../../entities/product-type';
 import { FilterService } from '../../services/filter.service';
 
 @Component({
@@ -28,10 +27,10 @@ export class ListProductsComponent implements OnInit {
     private productService: ProductService,
     private filterService: FilterService,
     private changeDetectorRef: ChangeDetectorRef,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
   ) {}
 
-  ngOnInit(): void {
+  private getProducts() {
     this.filterService.selectedProduct$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((filter) => {
@@ -41,14 +40,35 @@ export class ListProductsComponent implements OnInit {
             this.changeDetectorRef.detectChanges();
           });
         } else {
-          this.productService
-            .GetProductsWithFilter(filter.type)
-            .subscribe((result) => {
-              this.productList = result.data.allProducts;
-              this.changeDetectorRef.detectChanges();
-            });
+          this.filterService.selectedOrganizeFor$.subscribe((result) => {
+            this.productService
+              .GetProductsWithFilter(filter.type, result.type)
+              .subscribe((result) => {
+                this.productList = result.data.allProducts;
+                this.changeDetectorRef.detectChanges();
+              });
+          });
         }
         this.changeDetectorRef.markForCheck();
       });
+  }
+
+  private filterProductsByInputSearch() {
+    this.filterService.searchedProduct$.subscribe((result) => {
+      if (result !== '') {
+        const filteredListByInput = this.productList.filter((product) =>
+          product.name.includes(result),
+        );
+        this.productList = filteredListByInput;
+        this.changeDetectorRef.markForCheck();
+      } else {
+        this.getProducts();
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.getProducts();
+    this.filterProductsByInputSearch();
   }
 }

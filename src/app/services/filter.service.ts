@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { IProductFilter } from '../entities/product-filter';
 import { IOrganizeForFilter } from '../entities/organize-filter';
 import { IPageFilter } from '../entities/page-filter';
+import { OrganizeForType } from '../entities/organize-type';
 
 @Injectable({
   providedIn: 'root',
@@ -31,20 +32,22 @@ export class FilterService {
     { page: '>', selected: false },
   ];
 
+  public searchedProduct$ = new Subject<string>();
+
   private _selectedProduct$ = new BehaviorSubject<IProductFilter>(
-    this.productTypes[0]
+    this.productTypes[0],
   );
-  public selectedProduct$ = this._selectedProduct$.asObservable();
+  readonly selectedProduct$ = this._selectedProduct$.asObservable();
 
   private _selectedOrganizeFor$ = new BehaviorSubject<IOrganizeForFilter>(
-    this.organizeForTypes[0]
+    this.organizeForTypes[0],
   );
-  public selectedOrganizeFor$ = this._selectedOrganizeFor$.asObservable();
+  readonly selectedOrganizeFor$ = this._selectedOrganizeFor$.asObservable();
 
   private _selectedPage$ = new BehaviorSubject<IPageFilter>(
-    this.paginationOrder[0]
+    this.paginationOrder[0],
   );
-  public selectedPage$ = this._selectedPage$.asObservable();
+  readonly selectedPage$ = this._selectedPage$.asObservable();
 
   public getProductItems() {
     return this.productTypes;
@@ -82,5 +85,30 @@ export class FilterService {
         this._selectedPage$.next(item);
       }
     });
+  }
+
+  public getFieldByPriority(type: OrganizeForType) {
+    switch (type) {
+      case 'NEWS':
+        return {
+          field: 'created_at',
+          order: 'ASC',
+        };
+      case 'MINOR_PRICE':
+        return {
+          field: 'price_in_cents',
+          order: 'ASC',
+        };
+      case 'BIGGEST_PRICE':
+        return {
+          field: 'price_in_cents',
+          order: 'DESC',
+        };
+      default:
+        return {
+          field: 'saled',
+          order: 'DSC',
+        };
+    }
   }
 }

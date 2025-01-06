@@ -1,14 +1,27 @@
+@import "../../../scss/index";
+@import "../../../scss/mixins/flex";
+
 :host {
   display: block;
   padding: 0 64px;
 }
 
-.products_card_grid {
+.products_card {
   margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 256px);
-  grid-column-gap: 32px;
-  grid-row-gap: 24px;
-  justify-content: center;
-  align-items: center;
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 256px);
+    grid-column-gap: 32px;
+    grid-row-gap: 24px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__not_found {
+    margin-top: 4rem;
+    grid-column: 1 / -1;
+    justify-self: center;
+    align-self: center;
+    @include flex-custom(column, center, center, 8px);
+  }
 }

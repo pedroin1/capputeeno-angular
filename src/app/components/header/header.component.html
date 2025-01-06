@@ -5,12 +5,24 @@
       class="input_search_container__item"
       type="text"
       placeholder="Procurando por algo especifico?"
+      [formControl]="inputSearch"
+      (keydown.enter)="search()"
     />
-    <img
-      class="input_search_container__icon"
-      src="assets/svg/icon-search.svg"
-      alt=""
-    />
+    @if (hasValueSearched) {
+      <img
+        class="input_search_container__icon"
+        src="assets/svg/close-x.svg"
+        alt=""
+        (click)="clearSearch()"
+      />
+    } @else {
+      <img
+        class="input_search_container__icon"
+        src="assets/svg/icon-search.svg"
+        alt=""
+        (click)="search()"
+      />
+    }
   </div>
   <div class="bag_icon_container">
     <img src="assets/svg/icon-bag.svg" alt="" />

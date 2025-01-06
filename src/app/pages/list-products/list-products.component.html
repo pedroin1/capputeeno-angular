@@ -1,10 +1,13 @@
 <app-filter-bar></app-filter-bar>
-<section>
-  <ul class="products_card_grid">
+<section class="products_card">
+  <ul class="products_card__grid">
     @for (product of productList; track product.id) {
-    <app-card-product [product]="product" />
+      <app-card-product [product]="product" />
     } @empty {
-    <li>Sem itens...</li>
+      <div class="products_card__not_found">
+        <img src="assets/svg/not-found-item.svg" alt="" />
+        <p>Ops! Nenhum item foi encontrado...</p>
+      </div>
     }
   </ul>
 </section>
