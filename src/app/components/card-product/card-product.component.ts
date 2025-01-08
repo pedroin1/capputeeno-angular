@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IProduct } from '../../entities/product';
 import { CurrencyPipe } from '@angular/common';
 import { ReplacePipe } from '../../pipes/replace.pipe';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-card-product',
@@ -13,5 +14,9 @@ import { ReplacePipe } from '../../pipes/replace.pipe';
 })
 export class CardProductComponent {
   @Input({ required: true }) product!: IProduct;
-  constructor() {}
+  constructor(private localStorageService: LocalStorageService) {}
+
+  protected onAddToCart(product: IProduct) {
+    this.localStorageService.addItemOnCart(product);
+  }
 }

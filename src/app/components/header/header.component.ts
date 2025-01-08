@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,15 @@ import { FilterService } from '../../services/filter.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
-  itensCount: number = 2;
+export class HeaderComponent implements OnInit {
+  itensCount!: number;
   inputSearch = new FormControl('');
   hasValueSearched: boolean = false;
 
-  constructor(protected filterService: FilterService) {
+  constructor(
+    protected filterService: FilterService,
+    protected localStorageService: LocalStorageService,
+  ) {
     this.filterService.searchedProduct$.subscribe((result) => {
       if (result !== '') {
         this.hasValueSearched = true;
@@ -29,5 +33,11 @@ export class HeaderComponent {
     this.filterService.searchedProduct$.next('');
     this.inputSearch.reset('');
     this.hasValueSearched = false;
+  }
+
+  ngOnInit(): void {
+    this.localStorageService.getCountListItens().subscribe((result) => {
+      this.itensCount = result;
+    });
   }
 }

@@ -1,17 +1,17 @@
-@if(product){
-<div class="card_product">
-  <img
-    class="card_product__image"
-    [src]="product.image_url"
-    alt="product_image"
-    width="256"
-    height="300"
-  />
-  <div class="card_product__info">
-    <span class="card_product__info__title">{{ product.name }}</span>
-    <span class="card_product__info__price">{{
-      product.price_in_cents | currency : "BRL" | replace : "R$" : "R$ "
-    }}</span>
+@if (product) {
+  <div class="card_product" (click)="onAddToCart(product)">
+    <img
+      class="card_product__image"
+      [src]="product.image_url"
+      alt="product_image"
+      width="256"
+      height="300"
+    />
+    <div class="card_product__info">
+      <span class="card_product__info__title">{{ product.name }}</span>
+      <span class="card_product__info__price">{{
+        product.price_in_cents | currency: "BRL" | replace: "R$" : "R$ "
+      }}</span>
+    </div>
   </div>
-</div>
 }
