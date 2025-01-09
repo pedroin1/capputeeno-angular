@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -11,9 +11,9 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-  itensCount!: number;
-  inputSearch = new FormControl('');
+  itensCount = signal<number>(0);
   hasValueSearched: boolean = false;
+  inputSearch = new FormControl('');
 
   constructor(
     protected filterService: FilterService,
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.localStorageService.getCountListItens().subscribe((result) => {
-      this.itensCount = result;
+      this.itensCount.set(result);
     });
   }
 }

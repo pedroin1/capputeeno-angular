@@ -1,5 +1,6 @@
 @import "../../../scss/index";
 @import "../../../scss/mixins/flex";
+@import "../../../scss/theme/variables";
 
 :host {
   width: 100%;
@@ -17,9 +18,9 @@
 
 .header_title {
   font-size: 40px;
+  line-height: 60px;
   font-weight: 400;
   color: #5d5d6d;
-  line-height: 60px;
 }
 
 .bar_search_container {
@@ -73,5 +74,20 @@
     min-width: 20px;
     height: 20px;
     @include flex-default;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .header_title {
+    font-size: 32px;
+    line-height: 48px;
+  }
+
+  .input_search_container {
+    width: 250px;
+    &__item {
+      font-size: 12px;
+      line-height: 20px;
+    }
   }
 }

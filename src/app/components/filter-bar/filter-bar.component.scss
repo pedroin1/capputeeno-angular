@@ -1,4 +1,5 @@
 @import "../../../scss/mixins/flex";
+@import "../../../scss/theme/variables";
 @import "../../../scss/index";
 
 :host {
@@ -84,5 +85,24 @@
     border-color: var(--selected-color);
     color: var(--selected-color);
     background-color: var(--primary-light-1);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  :host {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .pagination_filter {
+    display: none;
+  }
+
+  .list_itens {
+    gap: 16px;
+    li {
+      font-size: 14px;
+    }
   }
 }
