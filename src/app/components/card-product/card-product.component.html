@@ -1,5 +1,5 @@
 @if (product) {
-  <div class="card_product" (click)="onAddToCart(product)">
+  <div class="card_product" (click)="navigate(product)">
     <img
       class="card_product__image"
       [src]="product.image_url"
