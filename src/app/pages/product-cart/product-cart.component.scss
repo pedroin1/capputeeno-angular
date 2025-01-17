@@ -1,3 +1,19 @@
+@import "../../../scss/mixins/flex";
+@import "../../../scss/theme/variables";
+@import "../../../scss/index";
+
 :host {
   display: block;
+  padding: 0 194px;
+}
+
+@media (max-width: $breakpoint-xl) {
+  :host {
+    padding: 0 128px;
+  }
+}
+@media (max-width: $breakpoint-lg) {
+  :host {
+    padding: 0 64px;
+  }
 }

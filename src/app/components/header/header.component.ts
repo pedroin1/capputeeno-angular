@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     protected filterService: FilterService,
     protected localStorageService: LocalStorageService,
+    protected router: Router,
   ) {
     this.filterService.searchedProduct$.subscribe((result) => {
       if (result !== '') {
@@ -34,6 +35,10 @@ export class HeaderComponent implements OnInit {
     this.filterService.searchedProduct$.next('');
     this.inputSearch.reset('');
     this.hasValueSearched = false;
+  }
+
+  protected onHandleNavigateToCart() {
+    this.router.navigate(['cart']);
   }
 
   ngOnInit(): void {

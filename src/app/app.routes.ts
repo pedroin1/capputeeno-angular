@@ -10,6 +10,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'cart',
+    loadComponent: () =>
+      import('./pages/product-cart/product-cart.component').then(
+        (page) => page.ProductCartComponent,
+      ),
+  },
+  {
     path: 'product/:id',
     loadComponent: () =>
       import('../app/pages/product-info/product-info.component').then(

@@ -10,11 +10,12 @@ import { ICategory } from '../../entities/product-category';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { RealPipe } from '../../pipes/real.pipe';
+import { BackButtonComponent } from '../../components/back-button/back-button.component';
 
 @Component({
   selector: 'app-product-info',
   standalone: true,
-  imports: [RealPipe],
+  imports: [RealPipe, BackButtonComponent],
   templateUrl: './product-info.component.html',
   styleUrl: './product-info.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

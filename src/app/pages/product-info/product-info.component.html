@@ -1,8 +1,5 @@
 @if (product()) {
-  <button class="back-button" (click)="onHandleBack()">
-    <img src="assets/svg/back-button.svg" alt="" />
-    Voltar
-  </button>
+  <app-back-button (click)="onHandleBack()"></app-back-button>
   <section class="product-info">
     <img class="product-info__image" [src]="product()?.image_url" alt="" />
     <div class="product-info__details">

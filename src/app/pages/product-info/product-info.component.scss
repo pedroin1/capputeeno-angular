@@ -9,6 +9,7 @@
 }
 
 .product-info {
+  margin-top: 16px;
   @include flex-custom(row, center, center, 2rem);
 
   &__image {
@@ -76,30 +77,6 @@
         background-color: #0a3f5e;
       }
     }
-  }
-}
-
-.back-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  gap: 8px;
-  font-size: 16px;
-  outline: none;
-  border: none;
-  color: #617480;
-  font-weight: 500;
-  margin-bottom: 16px;
-  cursor: pointer;
-
-  img {
-    width: 24px;
-    height: 24px;
-  }
-
-  &:hover {
-    text-decoration: underline;
   }
 }
 
