@@ -2,11 +2,12 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

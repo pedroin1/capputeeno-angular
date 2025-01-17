@@ -31,7 +31,6 @@ export class ProductService {
   ) {
     const queryFilter = productType.toString().toLowerCase();
     const { field, order } = this.filterService.getFieldByPriority(organizeFor);
-    console.log(field, order);
 
     return this.apollo.watchQuery<{ allProducts: IProduct[] }>({
       query: GET_PRODUCTS_WITH_FILTER(queryFilter, field, order),

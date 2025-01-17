@@ -4,4 +4,97 @@
 
 :host {
   display: block;
+  padding: 0 64px;
+  margin-top: 2rem;
+}
+
+.product-info {
+  @include flex-custom(row, center, center, 1rem);
+
+  &__image {
+    width: 640px;
+    height: 580px;
+  }
+
+  &__details {
+    height: 580px;
+    @include flex-custom(column, space-between, center, 1rem);
+
+    &-title {
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 48px;
+    }
+
+    &-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--black);
+    }
+
+    &-freight {
+      margin-top: 24px;
+      font-weight: 400;
+    }
+
+    &-description {
+      margin-top: 48px;
+      margin-bottom: 24px;
+      font-family: "Saira";
+      font-weight: 500;
+      line-height: 24px;
+      text-transform: uppercase;
+    }
+
+    &-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background-color: #115d8c;
+      outline: none;
+      border: 0px transparent;
+      border-radius: 4px;
+      padding: 15px;
+      font-size: 18px;
+      color: white;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      img {
+        width: 28px;
+        height: 28px;
+        color: white;
+      }
+
+      &:hover {
+        background-color: #0a3f5e;
+      }
+    }
+  }
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  gap: 8px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  color: #617480;
+  font-weight: 500;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

@@ -10,7 +10,6 @@ export const canDeactivateGuard: CanDeactivateFn<unknown> = (
 ) => {
   const productService = inject(ProductService);
   if (productService.hasProductSelected()) {
-    console.log(`produto limpo`);
     productService.clearProductSelected();
   }
   return true;

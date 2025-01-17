@@ -3,7 +3,7 @@ import { gql } from 'apollo-angular';
 export const GET_PRODUCTS_WITH_FILTER = (
   queryFilter: string,
   sortField: string,
-  sortOrder: string
+  sortOrder: string,
 ) => gql`
   query {
     allProducts(filter: { category: "${queryFilter}"} sortField: "${sortField}", sortOrder: "${sortOrder}") {
@@ -11,6 +11,8 @@ export const GET_PRODUCTS_WITH_FILTER = (
       name
       price_in_cents
       image_url
+      description
+      category
     }
   }
 `;

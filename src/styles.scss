@@ -15,6 +15,11 @@ body {
   color: var(--primary);
 }
 
+p,
+span {
+  color: var(--primary-dark-1);
+}
+
 h1 {
   font-family: "Saira Stencil One";
 }

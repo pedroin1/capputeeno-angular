@@ -7,6 +7,8 @@ export const GET_PRODUCTS = gql`
       name
       price_in_cents
       image_url
+      description
+      category
     }
   }
 `;
