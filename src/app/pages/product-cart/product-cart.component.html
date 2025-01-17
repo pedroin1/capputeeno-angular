@@ -1,1 +1,16 @@
 <app-back-button (click)="onHandleNavigate()"></app-back-button>
+<section class="product-cart">
+  <h2 class="product-cart__title">Seu Carrinho</h2>
+  @if ((localStorageService.productList$ | async)!.length > 0) {
+    <p class="product-cart__total">
+      Total ({{ localStorageService.getCountListItens() | async }} Produtos)
+      <span class="product-cart__total-bold">{{ value | real }}</span>
+    </p>
+
+    @for (product of localStorageService.productList$ | async; track $index) {
+      <p>{{ product.name }}</p>
+    }
+  } @else {
+    <span>Sem nenhum item no carrinho...</span>
+  }
+</section>

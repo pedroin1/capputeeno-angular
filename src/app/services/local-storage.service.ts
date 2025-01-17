@@ -7,17 +7,26 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LocalStorageService {
   private CARD_LIST_PRODUCTS = 'cart-list-products';
+
   private productList: IProduct[] = [];
+
   private _countItems$ = new BehaviorSubject<number>(0);
+
+  private _productList$ = new BehaviorSubject<IProduct[]>([]);
+
+  readonly productList$ = this._productList$.asObservable();
 
   constructor() {}
 
   public addItemOnCart(product: IProduct) {
     this.productList.push(product);
+
     localStorage.setItem(
       this.CARD_LIST_PRODUCTS,
       JSON.stringify(this.productList),
     );
+
+    this._productList$.next(this.getList());
     this._countItems$.next(this.getList().length);
   }
 
