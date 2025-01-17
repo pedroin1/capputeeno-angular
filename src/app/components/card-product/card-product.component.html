@@ -11,10 +11,7 @@
       <span class="card_product__info__title">{{ product.name }}</span>
       <!--  TODO: ACERTAR A FORMATACAO DA MOEDA -->
       <span class="card_product__info__price">{{
-        product.price_in_cents / 100
-          | currency: "BRL"
-          | replace: "." : ","
-          | replace: "R$" : "R$ "
+        product.price_in_cents | real
       }}</span>
     </div>
   </div>

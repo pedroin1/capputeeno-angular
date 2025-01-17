@@ -9,13 +9,12 @@ import { ProductService } from '../../services/product.service';
 import { ICategory } from '../../entities/product-category';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
-import { ReplacePipe } from '../../pipes/replace.pipe';
+import { RealPipe } from '../../pipes/real.pipe';
 
 @Component({
   selector: 'app-product-info',
   standalone: true,
-  imports: [CurrencyPipe, ReplacePipe],
+  imports: [RealPipe],
   templateUrl: './product-info.component.html',
   styleUrl: './product-info.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

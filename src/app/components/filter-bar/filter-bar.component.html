@@ -1,33 +1,35 @@
 <ul class="list_itens">
   @for (product of productItems; track $index) {
-  <li
-    [ngClass]="{ 'item-list-selected': product.selected }"
-    (click)="onToogleProduct(product)"
-  >
-    {{ product.name }}
-  </li>
+    <li
+      [ngClass]="{ 'item-list-selected': product.selected }"
+      (click)="onToogleProduct(product)"
+    >
+      {{ product.name }}
+    </li>
   }
 </ul>
 <section class="right_menu_filter">
   <button class="organize_for_button" (click)="openMenu()">
-    <p>Organizar por</p>
+    <span class="organize_for_button-text">Organizar por</span>
     <img src="assets/svg/arrow-down.svg" alt="" />
   </button>
   @if (isOpenMenu) {
-  <ul class="priority_list">
-    @for (organizeFor of organizeForItems; track $index) {
-    <li (click)="onToogleOrganizeFor(organizeFor)">{{ organizeFor.name }}</li>
-    }
-  </ul>
+    <ul class="priority_list">
+      @for (organizeFor of organizeForItems; track $index) {
+        <li (click)="onToogleOrganizeFor(organizeFor)">
+          {{ organizeFor.name }}
+        </li>
+      }
+    </ul>
   }
   <ul class="pagination_filter">
     @for (page of paginationItems; track $index) {
-    <li
-      [ngClass]="{ 'page-selected': page.selected }"
-      (click)="onTooglePage(page)"
-    >
-      {{ page.page }}
-    </li>
+      <li
+        [ngClass]="{ 'page-selected': page.selected }"
+        (click)="onTooglePage(page)"
+      >
+        {{ page.page }}
+      </li>
     }
   </ul>
 </section>

@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IProduct } from '../../entities/product';
-import { CurrencyPipe } from '@angular/common';
-import { ReplacePipe } from '../../pipes/replace.pipe';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { RealPipe } from '../../pipes/real.pipe';
 
 @Component({
   selector: 'app-card-product',
   standalone: true,
-  imports: [CurrencyPipe, ReplacePipe],
+  imports: [RealPipe],
   templateUrl: './card-product.component.html',
   styleUrl: './card-product.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

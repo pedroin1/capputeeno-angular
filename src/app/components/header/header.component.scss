@@ -6,7 +6,7 @@
   width: 100%;
   min-width: 350px;
   height: 80px;
-  padding: 0 64px;
+  padding: 0 194px;
   background: var(--white);
   @include flex-custom(row, space-between, center, 8px, nowrap);
 
@@ -90,5 +90,16 @@
       font-size: 12px;
       line-height: 20px;
     }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  :host {
+    padding: 0 128px;
+  }
+}
+@media (max-width: $breakpoint-sm) {
+  :host {
+    padding: 0 64px;
   }
 }

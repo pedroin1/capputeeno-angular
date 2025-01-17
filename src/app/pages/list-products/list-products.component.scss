@@ -1,9 +1,10 @@
 @import "../../../scss/index";
 @import "../../../scss/mixins/flex";
+@import "../../../scss/theme/variables";
 
 :host {
   display: block;
-  padding: 0 64px;
+  padding: 0 194px;
 }
 
 .products_card {
@@ -23,5 +24,16 @@
     justify-self: center;
     align-self: center;
     @include flex-custom(column, center, center, 8px);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  :host {
+    padding: 0 128px;
+  }
+}
+@media (max-width: $breakpoint-sm) {
+  :host {
+    padding: 0 64px;
   }
 }
