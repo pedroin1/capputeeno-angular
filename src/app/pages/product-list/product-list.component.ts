@@ -13,14 +13,14 @@ import { IProduct } from '../../entities/product';
 import { FilterService } from '../../services/filter.service';
 
 @Component({
-  selector: 'app-list-products',
+  selector: 'app-products-list',
   standalone: true,
   imports: [FilterBarComponent, CardProductComponent],
-  templateUrl: './list-products.component.html',
-  styleUrl: './list-products.component.scss',
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListProductsComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   productList: IProduct[] = [];
 
   constructor(
