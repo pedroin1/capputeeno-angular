@@ -27,12 +27,12 @@
   }
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: $breakpoint-xl) {
   :host {
     padding: 0 128px;
   }
 }
-@media (max-width: $breakpoint-sm) {
+@media (max-width: $breakpoint-lg) {
   :host {
     padding: 0 64px;
   }
