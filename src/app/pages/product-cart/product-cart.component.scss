@@ -26,6 +26,13 @@
       color: var(--primary-dark-1);
     }
   }
+
+  &__list {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 @media (max-width: $breakpoint-xl) {

@@ -1,0 +1,54 @@
+@import "../../../scss/index";
+@import "../../../scss/mixins/flex";
+
+:host {
+  @include flex-default;
+  background-color: var(--white);
+  border-radius: 8px;
+  height: 211px;
+}
+
+.product-cart__image {
+  width: 256px;
+  max-height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.product-cart__info {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &-header,
+  &-footer {
+    @include flex-custom(row, space-between, center);
+  }
+
+  &-header {
+    &-button {
+      background: transparent;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  &-footer {
+    &-price {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--black);
+    }
+  }
+  &-description {
+  }
+}

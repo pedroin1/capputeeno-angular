@@ -49,8 +49,6 @@ export class ProductInfoComponent implements OnInit {
     this.productService.selectedProduct$.subscribe((productSelected) => {
       if (productSelected) {
         this.product.set(productSelected);
-      } else {
-        this.router.navigate(['/']);
       }
     });
   }

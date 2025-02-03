@@ -1,0 +1,22 @@
+@if (product()) {
+  <img class="product-cart__image" [src]="product().image_url" alt="" />
+  <div class="product-cart__info">
+    <div class="product-cart__info-header">
+      <h2>
+        {{ product().name }}
+      </h2>
+      <button class="product-cart__info-header-button">
+        <img src="assets/svg/garbage-red.svg" alt="exclude-button" />
+      </button>
+    </div>
+    <span class="product-cart__info-description">{{
+      product().description
+    }}</span>
+    <div class="product-cart__info-footer">
+      <span>1</span>
+      <span class="product-cart__info-footer-price">{{
+        product().price_in_cents | real
+      }}</span>
+    </div>
+  </div>
+}

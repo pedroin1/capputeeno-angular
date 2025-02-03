@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   }
 
   protected onHandleNavigateToCart() {
-    this.router.navigate(['cart']);
+    this.router.navigate(['/cart'], { replaceUrl: true });
   }
 
   ngOnInit(): void {

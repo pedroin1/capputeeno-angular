@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { RealPipe } from '../../pipes/real.pipe';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AsyncPipe } from '@angular/common';
+import { CardProductCartComponent } from '../../components/card-product-cart/card-product-cart.component';
 
 @Component({
   selector: 'app-product-cart',
   standalone: true,
-  imports: [BackButtonComponent, RealPipe, AsyncPipe],
+  imports: [CardProductCartComponent, BackButtonComponent, RealPipe, AsyncPipe],
   templateUrl: './product-cart.component.html',
   styleUrl: './product-cart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
