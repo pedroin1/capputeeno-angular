@@ -7,7 +7,7 @@ import {
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { Router } from '@angular/router';
 import { RealPipe } from '../../pipes/real.pipe';
-import { CartService } from '../../services/local-storage.service';
+import { CartService } from '../../services/cart.service';
 import { AsyncPipe } from '@angular/common';
 import { CardProductCartComponent } from '../../components/card-product-cart/card-product-cart.component';
 

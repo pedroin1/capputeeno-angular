@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RealPipe } from '../../pipes/real.pipe';
-import { CartService } from '../../services/local-storage.service';
+import { CartService } from '../../services/cart.service';
 import { ICart } from '../../entities/cart';
 
 @Component({
