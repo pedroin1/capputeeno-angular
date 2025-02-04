@@ -2,12 +2,12 @@
 <section class="product-cart">
   <h2 class="product-cart__title">Seu Carrinho</h2>
   <p class="product-cart__total">
-    Total ({{ localStorageService.getCountListItens() | async }} Produtos)
-    <span class="product-cart__total-bold">{{ value | real }}</span>
+    Total ({{ this.cartService.countItems$ | async }} Produtos)
+    <span class="product-cart__total-bold">{{ totalValue() | real }}</span>
   </p>
   <ul class="product-cart__list">
-    @for (product of localStorageService.productList$ | async; track $index) {
-      <app-card-product-cart [product]="product"></app-card-product-cart>
+    @for (cartItem of this.cartService.cartList$ | async; track $index) {
+      <app-card-product-cart [cartItem]="cartItem"></app-card-product-cart>
     } @empty {
       <span>Sem nenhum item no carrinho...</span>
     }

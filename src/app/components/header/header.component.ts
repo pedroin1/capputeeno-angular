@@ -1,24 +1,24 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { CartService } from '../../services/local-storage.service';
 import { Router, RouterLink } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, AsyncPipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
-  itensCount = signal<number>(0);
+export class HeaderComponent {
   hasValueSearched: boolean = false;
   inputSearch = new FormControl('');
 
   constructor(
     protected filterService: FilterService,
-    protected localStorageService: LocalStorageService,
+    protected cartService: CartService,
     protected router: Router,
   ) {
     this.filterService.searchedProduct$.subscribe((result) => {
@@ -39,11 +39,5 @@ export class HeaderComponent implements OnInit {
 
   protected onHandleNavigateToCart() {
     this.router.navigate(['/cart'], { replaceUrl: true });
-  }
-
-  ngOnInit(): void {
-    this.localStorageService.getCountListItens().subscribe((result) => {
-      this.itensCount.set(result);
-    });
   }
 }

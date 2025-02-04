@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class RealPipe implements PipeTransform {
   transform(value: number): string {
-    if (!Number(value)) {
-      throw new Error('Value is not an number');
+    if (typeof value !== 'number') {
+      throw new Error(`${value} is not a number`);
     }
 
     return (value / 100).toLocaleString('pt-BR', {

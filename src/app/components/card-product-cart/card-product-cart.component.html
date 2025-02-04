@@ -1,22 +1,31 @@
-@if (product()) {
-  <img class="product-cart__image" [src]="product().image_url" alt="" />
+@if (cartItem()) {
+  <img
+    class="product-cart__image"
+    [src]="cartItem().product.image_url"
+    alt=""
+  />
   <div class="product-cart__info">
     <div class="product-cart__info-header">
       <h2>
-        {{ product().name }}
+        {{ cartItem().product.name }}
       </h2>
-      <button class="product-cart__info-header-button">
+      <button
+        class="product-cart__info-header-button"
+        (click)="onHandleRemoveItem(cartItem().product.id)"
+      >
         <img src="assets/svg/garbage-red.svg" alt="exclude-button" />
       </button>
     </div>
     <span class="product-cart__info-description">{{
-      product().description
+      cartItem().product.description
     }}</span>
     <div class="product-cart__info-footer">
-      <span>1</span>
+      <span>{{ cartItem().count }}</span>
       <span class="product-cart__info-footer-price">{{
-        product().price_in_cents | real
+        cartItem().product.price_in_cents | real
       }}</span>
     </div>
   </div>
+} @else {
+  <span>Desculpe item não encontrado...</span>
 }

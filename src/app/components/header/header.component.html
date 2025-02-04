@@ -26,6 +26,6 @@
   </div>
   <div class="bag_icon_container" (click)="onHandleNavigateToCart()">
     <img src="assets/svg/icon-bag.svg" alt="" />
-    <p>{{ itensCount() }}</p>
+    <p>{{ this.cartService.countItems$ | async }}</p>
   </div>
 </div>

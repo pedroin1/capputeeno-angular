@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { IProduct } from '../../entities/product';
 import { RealPipe } from '../../pipes/real.pipe';
+import { CartService } from '../../services/local-storage.service';
+import { ICart } from '../../entities/cart';
 
 @Component({
   selector: 'app-card-product-cart',
@@ -11,7 +12,11 @@ import { RealPipe } from '../../pipes/real.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProductCartComponent {
-  public product = input.required<IProduct>();
+  public cartItem = input.required<ICart>();
 
-  constructor() {}
+  constructor(private cartService: CartService) {}
+
+  protected onHandleRemoveItem(productId: string) {
+    this.cartService.removeItemFromCart(productId);
+  }
 }

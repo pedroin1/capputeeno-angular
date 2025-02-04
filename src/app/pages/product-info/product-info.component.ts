@@ -7,7 +7,7 @@ import {
 import { IProduct } from '../../entities/product';
 import { ProductService } from '../../services/product.service';
 import { ICategory } from '../../entities/product-category';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { CartService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { RealPipe } from '../../pipes/real.pipe';
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
@@ -24,7 +24,7 @@ export class ProductInfoComponent implements OnInit {
   protected product = signal<IProduct | null>(null);
   constructor(
     private productService: ProductService,
-    private localStorageService: LocalStorageService,
+    private cartService: CartService,
     private router: Router,
   ) {}
 
@@ -38,7 +38,7 @@ export class ProductInfoComponent implements OnInit {
   }
 
   protected onAddOnCart(product: IProduct) {
-    this.localStorageService.addItemOnCart(product);
+    this.cartService.addItemOnCart(product);
   }
 
   protected onHandleBack() {
