@@ -1,5 +1,5 @@
-<app-back-button (click)="onHandleNavigate()"></app-back-button>
 <section class="product-cart">
+  <app-back-button (click)="onHandleNavigateToHome()"></app-back-button>
   <h2 class="product-cart__title">Seu Carrinho</h2>
   <p class="product-cart__total">
     Total ({{ this.cartService.countItems$ | async }} Produtos)
@@ -13,4 +13,42 @@
     }
   </ul>
   <!--TODO: Implementar mensagem de sem itens no-->
+</section>
+<section class="product-resume">
+  <div>
+    <h2 class="product-resume__title">Resumo do pedido</h2>
+    <p class="product-resume__text">
+      <span>Subtotal de produtos</span><span>{{ totalValue() | real }}</span>
+    </p>
+    <p class="product-resume__text">
+      <span>Entrega</span><span>R$ 40,00</span>
+    </p>
+    <p class="product-resume__text">
+      <span class="product-resume__text-bold">Total</span
+      ><span class="product-resume__text-bold">{{
+        totalValueWithFreight() | real
+      }}</span>
+    </p>
+    <button
+      class="product-resume__button"
+      [disabled]="(cartService.cartList$ | async)!.length <= 0"
+      (click)="onHandleBuyItems()"
+    >
+      Finalizar Compra
+    </button>
+  </div>
+  <ul class="product-resume__references">
+    <li>
+      <a href="">Ajuda</a>
+    </li>
+    <li>
+      <a href="">Reembolsos</a>
+    </li>
+    <li>
+      <a href="">Entregas e frete</a>
+    </li>
+    <li>
+      <a href=""> Trocas e devoluçoes</a>
+    </li>
+  </ul>
 </section>

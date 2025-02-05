@@ -3,15 +3,16 @@
 @import "../../../scss/index";
 
 :host {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
   padding: 0 194px;
   margin-top: 2rem;
 }
 
 .product-cart {
-  margin-top: 16px;
-
   &__title {
+    margin-top: 16px;
     font-weight: 500;
     font-size: 24px;
     line-height: 36px;
@@ -35,13 +36,121 @@
   }
 }
 
+.product-resume {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 350px;
+  background-color: var(--white);
+  padding: 16px 24px;
+  height: 80vh;
+  max-height: 100%;
+
+  &__title {
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 40px;
+    text-transform: uppercase;
+    color: var(--primary-dark-1);
+  }
+
+  &__text {
+    @include flex-custom(row, space-between, center, 0px, wrap);
+
+    &-bold {
+      font-weight: 600;
+      color: var(--primary-dark-1);
+    }
+    //margem nos dois primeiros elementos
+    &:nth-of-type(-n + 2) {
+      margin-bottom: 12px;
+    }
+
+    &:nth-of-type(3) {
+      border-top: 2px solid var(--primary-light-3);
+      padding-top: 8px;
+      margin: 16px 0;
+    }
+  }
+
+  &__button {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+    background-color: var(--button-variant-1);
+
+    &:hover {
+      background-color: var(--button-variant-2);
+    }
+    &:active {
+      background-color: var(--button-variant-3);
+    }
+    &:disabled {
+      background-color: var(--primary-light-3);
+      cursor: not-allowed;
+    }
+  }
+  &__references {
+    margin-top: auto;
+    list-style: none;
+    @include flex-custom(column, flex-end, flex-start, 8px, wrap);
+
+    li > a {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 21px;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+    li > a:hover {
+      color: var(--primary-dark-1);
+    }
+  }
+}
+
 @media (max-width: $breakpoint-xl) {
   :host {
     padding: 0 128px;
+    padding-bottom: 24px;
+    flex-direction: column;
+  }
+
+  .product-resume {
+    height: fit-content;
+    margin: 0 auto;
+    max-width: 100%;
+
+    &__references {
+      display: none;
+    }
   }
 }
 @media (max-width: $breakpoint-lg) {
   :host {
     padding: 0 64px;
+    padding-bottom: 24px;
+    flex-direction: column;
+  }
+  .product-resume {
+    height: fit-content;
+    margin: 0 auto;
+    width: 100vw;
+
+    &__references {
+      display: none;
+    }
   }
 }

@@ -21,14 +21,22 @@ import { CardProductCartComponent } from '../../components/card-product-cart/car
 })
 export class ProductCartComponent implements OnInit {
   protected totalValue = signal<number>(0);
+  protected totalValueWithFreight = signal<number>(0);
 
   constructor(
     private router: Router,
     protected cartService: CartService,
   ) {}
 
-  protected onHandleNavigate() {
+  protected onHandleNavigateToHome() {
     this.router.navigate(['/']);
+  }
+  protected onHandleBuyItems() {
+    alert('Compra Finalizada !');
+    setTimeout(() => {
+      this.cartService.finishBuy();
+      this.router.navigate(['/']);
+    }, 700);
   }
 
   ngOnInit(): void {
@@ -40,8 +48,9 @@ export class ProductCartComponent implements OnInit {
             0,
           ),
         );
-      } else {
-        this.totalValue.set(0);
+
+        //4000 pq é dividido por 100 entao o frete é 40
+        this.totalValueWithFreight.set(this.totalValue() + 4000);
       }
     });
   }

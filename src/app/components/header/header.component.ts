@@ -13,8 +13,8 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  hasValueSearched: boolean = false;
-  inputSearch = new FormControl('');
+  protected hasValueSearched: boolean = false;
+  protected inputSearch = new FormControl<string>('');
 
   constructor(
     protected filterService: FilterService,
@@ -28,10 +28,10 @@ export class HeaderComponent {
     });
   }
 
-  protected search() {
+  protected onHandleSearch() {
     this.filterService.searchedProduct$.next(this.inputSearch.value as string);
   }
-  protected clearSearch() {
+  protected onHandleClearSerach() {
     this.filterService.searchedProduct$.next('');
     this.inputSearch.reset('');
     this.hasValueSearched = false;

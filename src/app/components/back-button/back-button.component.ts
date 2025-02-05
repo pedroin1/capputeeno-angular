@@ -9,8 +9,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackButtonComponent {
-  constructor() {}
-
   text = input<string>('Voltar');
 
   action = input<'button' | 'submit' | 'reset'>('button');

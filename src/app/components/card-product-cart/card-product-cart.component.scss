@@ -43,6 +43,15 @@
   }
 
   &-footer {
+    &-select {
+      margin-left: 4px;
+      width: 65px;
+      height: 40px;
+      border-color: var(--border-alt);
+      border-radius: 8px;
+      padding: 8px;
+      background-color: var(--primary-light-1);
+    }
     &-price {
       font-size: 16px;
       font-weight: 600;
@@ -51,5 +60,8 @@
     }
   }
   &-description {
+    max-height: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

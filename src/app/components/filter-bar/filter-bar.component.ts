@@ -1,10 +1,5 @@
 import { NgClass } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FilterService } from '../../services/filter.service';
 import { IProductFilter } from '../../entities/product-filter';
 import { IOrganizeForFilter } from '../../entities/organize-filter';
@@ -24,10 +19,7 @@ export class FilterBarComponent implements OnInit {
   paginationItems: IPageFilter[] = [];
   isOpenMenu: boolean = false;
 
-  constructor(
-    private destroyRef: DestroyRef,
-    private filterService: FilterService
-  ) {}
+  constructor(private filterService: FilterService) {}
 
   public openMenu() {
     this.isOpenMenu = !this.isOpenMenu;

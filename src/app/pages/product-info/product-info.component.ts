@@ -41,7 +41,7 @@ export class ProductInfoComponent implements OnInit {
     this.cartService.addItemOnCart(product);
   }
 
-  protected onHandleBack() {
+  protected onHandleNavigateToHome() {
     this.router.navigate(['/']);
   }
 

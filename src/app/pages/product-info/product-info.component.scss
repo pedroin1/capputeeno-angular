@@ -58,13 +58,13 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      background-color: #115d8c;
+      background-color: var(--button-variant-5);
       outline: none;
       border: 0px transparent;
       border-radius: 4px;
       padding: 15px;
       font-size: 18px;
-      color: white;
+      color: var(--white);
       text-transform: uppercase;
       cursor: pointer;
 
@@ -74,7 +74,10 @@
       }
 
       &:hover {
-        background-color: #0a3f5e;
+        background-color: var(--button-variant-6);
+      }
+      &:active {
+        background-color: var(--button-variant-7);
       }
     }
   }

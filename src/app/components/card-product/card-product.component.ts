@@ -19,7 +19,7 @@ export class CardProductComponent {
     private productService: ProductService,
   ) {}
 
-  protected navigate(product: IProduct) {
+  protected onHandleNavigate(product: IProduct) {
     this.productService.selectProduct(product);
     this.router.navigate([`/product/${product.id}`]);
   }

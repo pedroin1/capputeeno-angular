@@ -20,7 +20,21 @@
       cartItem().product.description
     }}</span>
     <div class="product-cart__info-footer">
-      <span>{{ cartItem().count }}</span>
+      <label
+        >Qtd:
+
+        <select
+          class="product-cart__info-footer-select"
+          [formControl]="quantityFormControl"
+        >
+          @for (option of options; track $index) {
+            <option [ngValue]="option" [selected]="option === cartItem().count">
+              {{ option }}
+            </option>
+          }
+        </select>
+      </label>
+
       <span class="product-cart__info-footer-price">{{
         cartItem().product.price_in_cents | real
       }}</span>

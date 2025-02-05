@@ -6,21 +6,21 @@
       type="text"
       placeholder="Procurando por algo especifico?"
       [formControl]="inputSearch"
-      (keydown.enter)="search()"
+      (keydown.enter)="onHandleSearch()"
     />
     @if (hasValueSearched) {
       <img
         class="input_search_container__icon"
         src="assets/svg/close-x.svg"
         alt=""
-        (click)="clearSearch()"
+        (click)="onHandleClearSerach()"
       />
     } @else {
       <img
         class="input_search_container__icon"
         src="assets/svg/icon-search.svg"
         alt=""
-        (click)="search()"
+        (click)="onHandleSearch()"
       />
     }
   </div>

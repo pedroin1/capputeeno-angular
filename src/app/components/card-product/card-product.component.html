@@ -1,5 +1,5 @@
 @if (product) {
-  <div class="card_product" (click)="navigate(product)">
+  <div class="card_product" (click)="onHandleNavigate(product)">
     <img
       class="card_product__image"
       [src]="product.image_url"
@@ -9,10 +9,11 @@
     />
     <div class="card_product__info">
       <span class="card_product__info__title">{{ product.name }}</span>
-      <!--  TODO: ACERTAR A FORMATACAO DA MOEDA -->
       <span class="card_product__info__price">{{
         product.price_in_cents | real
       }}</span>
     </div>
   </div>
+} @else {
+  <span>Sem produto...</span>
 }

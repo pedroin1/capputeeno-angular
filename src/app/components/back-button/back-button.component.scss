@@ -1,3 +1,5 @@
+@import "../../../scss/index";
+
 button {
   display: flex;
   align-items: center;
@@ -7,7 +9,7 @@ button {
   font-size: 16px;
   outline: none;
   border: none;
-  color: #617480;
+  color: var(--back-button-text);
   font-weight: 500;
   cursor: pointer;
 
@@ -18,5 +20,6 @@ button {
 
   &:hover {
     text-decoration: underline;
+    color: var(--primary-dark-1);
   }
 }

@@ -1,5 +1,5 @@
 @if (product()) {
-  <app-back-button (click)="onHandleBack()"></app-back-button>
+  <app-back-button (click)="onHandleNavigateToHome()"></app-back-button>
   <section class="product-info">
     <img class="product-info__image" [src]="product()?.image_url" alt="" />
     <div class="product-info__details">

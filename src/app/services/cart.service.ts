@@ -23,21 +23,17 @@ export class CartService {
     if (typeof localStorage !== 'undefined') {
       this.onGetCartList();
       this.onGetCountItems();
-      this.serializePrivateList();
+      this.initializePrivateList();
     }
   }
 
   public addItemOnCart(product: IProduct) {
-    if (this.cartListPrivate.length > 0) {
-      const productIndex = this.cartListPrivate.findIndex(
-        ({ product: listProduct }) => listProduct.id === product.id,
-      );
+    const productIndex = this.cartListPrivate.findIndex(
+      ({ product: listProduct }) => listProduct.id === product.id,
+    );
 
-      if (productIndex > -1) {
-        this.cartListPrivate[productIndex].count += 1;
-      } else {
-        this.cartListPrivate.push({ product: product, count: 1 });
-      }
+    if (productIndex > -1) {
+      this.cartListPrivate[productIndex].count += 1;
     } else {
       this.cartListPrivate.push({ product: product, count: 1 });
     }
@@ -60,21 +56,43 @@ export class CartService {
         this.cartListPrivate.splice(productIndex, 1);
       }
     }
+
     this.updateCartOnLocalStorage();
     this.updateCartObservers();
   }
 
-  private updateCartObservers() {
-    this._cartList$.next(this.cartListPrivate);
-    this._countItems$.next(
-      this.cartListPrivate.reduce((acc, { count }) => acc + count, 0),
+  public updateQuantity(productId: string, newQuantity: number) {
+    const productIndex = this.cartListPrivate.findIndex(
+      ({ product }) => product.id === productId,
     );
+
+    if (productIndex === -1) return;
+
+    if (productIndex > -1) {
+      this.cartListPrivate[productIndex].count = newQuantity;
+    }
+
+    this.updateCartOnLocalStorage();
+    this.updateCartObservers();
+  }
+
+  public finishBuy() {
+    this.cartListPrivate = [];
+    this.updateCartOnLocalStorage();
+    this.updateCartObservers();
   }
 
   private updateCartOnLocalStorage() {
     localStorage.setItem(
       this.CART_LIST_PRODUCTS,
       JSON.stringify(this.cartListPrivate),
+    );
+  }
+
+  private updateCartObservers() {
+    this._cartList$.next(this.cartListPrivate);
+    this._countItems$.next(
+      this.cartListPrivate.reduce((acc, { count }) => acc + count, 0),
     );
   }
 
@@ -93,7 +111,8 @@ export class CartService {
       this.getListFromLocalStorage().reduce((acc, { count }) => acc + count, 0),
     );
   }
-  private serializePrivateList() {
+
+  private initializePrivateList() {
     this.cartListPrivate = this.getListFromLocalStorage();
   }
 }

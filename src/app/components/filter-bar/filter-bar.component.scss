@@ -21,6 +21,10 @@
     text-transform: uppercase;
     border-bottom: 4px solid transparent;
     cursor: pointer;
+
+    &:hover {
+      color: var(--primary-dark-1);
+    }
   }
 
   .item-list-selected {
