@@ -33,6 +33,9 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 8px;
   }
 }
 
