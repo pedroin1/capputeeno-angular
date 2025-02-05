@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   OnInit,
   signal,
 } from '@angular/core';
@@ -21,7 +22,12 @@ import { CardProductCartComponent } from '../../components/card-product-cart/car
 })
 export class ProductCartComponent implements OnInit {
   protected totalValue = signal<number>(0);
-  protected totalValueWithFreight = signal<number>(0);
+
+  protected totalValueWithFreight = computed(() => {
+    if (this.totalValue() > 0) {
+      return this.totalValue() + 4000;
+    } else return 0;
+  });
 
   constructor(
     private router: Router,
@@ -48,9 +54,8 @@ export class ProductCartComponent implements OnInit {
             0,
           ),
         );
-
-        //4000 pq é dividido por 100 entao o frete é 40
-        this.totalValueWithFreight.set(this.totalValue() + 4000);
+      } else {
+        this.totalValue.set(0);
       }
     });
   }

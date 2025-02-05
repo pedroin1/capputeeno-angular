@@ -22,6 +22,7 @@ import { BackButtonComponent } from '../../components/back-button/back-button.co
 })
 export class ProductInfoComponent implements OnInit {
   protected product = signal<IProduct | null>(null);
+
   constructor(
     private productService: ProductService,
     private cartService: CartService,
