@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
   OnInit,
   signal,
 } from '@angular/core';
@@ -11,6 +12,8 @@ import { RealPipe } from '../../pipes/real.pipe';
 import { CartService } from '../../services/cart.service';
 import { AsyncPipe } from '@angular/common';
 import { CardProductCartComponent } from '../../components/card-product-cart/card-product-cart.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-cart',
@@ -32,31 +35,41 @@ export class ProductCartComponent implements OnInit {
   constructor(
     private router: Router,
     protected cartService: CartService,
+    private destroyRef: DestroyRef,
+    private toastService: ToastrService,
   ) {}
 
   protected onHandleNavigateToHome() {
     this.router.navigate(['/']);
   }
   protected onHandleBuyItems() {
-    alert('Compra Finalizada !');
-    setTimeout(() => {
-      this.cartService.finishBuy();
-      this.router.navigate(['/']);
-    }, 700);
+    try {
+      this.toastService.success('Compra finalizada com sucesso!');
+
+      setTimeout(() => {
+        this.cartService.finishBuy();
+        this.router.navigate(['/']);
+      }, 700);
+    } catch (error: unknown) {
+      console.log(error);
+      this.toastService.error('Erro ao finalizar compra !');
+    }
   }
 
   ngOnInit(): void {
-    this.cartService.cartList$.subscribe((cartList) => {
-      if (cartList.length > 0) {
-        this.totalValue.set(
-          cartList.reduce(
-            (acc, { product, count }) => acc + product.price_in_cents * count,
-            0,
-          ),
-        );
-      } else {
-        this.totalValue.set(0);
-      }
-    });
+    this.cartService.cartList$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((cartList) => {
+        if (cartList.length > 0) {
+          this.totalValue.set(
+            cartList.reduce(
+              (acc, { product, count }) => acc + product.price_in_cents * count,
+              0,
+            ),
+          );
+        } else {
+          this.totalValue.set(0);
+        }
+      });
   }
 }

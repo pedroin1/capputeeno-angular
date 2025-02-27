@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   OnInit,
   signal,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import { CartService } from '../../services/cart.service';
 import { Router } from '@angular/router';
 import { RealPipe } from '../../pipes/real.pipe';
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product-info',
@@ -27,6 +29,7 @@ export class ProductInfoComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private router: Router,
+    private destroyRef: DestroyRef,
   ) {}
 
   protected getCategoryName(productCategory: ICategory) {
@@ -47,10 +50,12 @@ export class ProductInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.selectedProduct$.subscribe((productSelected) => {
-      if (productSelected) {
-        this.product.set(productSelected);
-      }
-    });
+    this.productService.selectedProduct$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((productSelected) => {
+        if (productSelected) {
+          this.product.set(productSelected);
+        }
+      });
   }
 }
