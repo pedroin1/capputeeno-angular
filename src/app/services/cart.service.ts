@@ -33,7 +33,11 @@ export class CartService {
     );
 
     if (productIndex > -1) {
-      this.cartListPrivate[productIndex].count += 1;
+      if (this.cartListPrivate[productIndex].count === 5) {
+        throw new Error('Quantidade deste produto excedida no carrinho');
+      } else {
+        this.cartListPrivate[productIndex].count += 1;
+      }
     } else {
       this.cartListPrivate.push({ product: product, count: 1 });
     }

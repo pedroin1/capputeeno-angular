@@ -17,6 +17,7 @@ import {
   FREE_FREIGHT_VALUE,
   FREIGHT_VALUE,
 } from '../../constants/product-freight';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-info',
@@ -38,6 +39,7 @@ export class ProductInfoComponent implements OnInit {
     private cartService: CartService,
     private router: Router,
     private destroyRef: DestroyRef,
+    private toastService: ToastrService,
   ) {}
 
   protected getCategoryName(productCategory: ICategory) {
@@ -50,7 +52,13 @@ export class ProductInfoComponent implements OnInit {
   }
 
   protected onAddOnCart(product: IProduct) {
-    this.cartService.addItemOnCart(product);
+    try {
+      this.cartService.addItemOnCart(product);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        this.toastService.warning(error.message);
+      }
+    }
   }
 
   protected onHandleNavigateToHome() {
