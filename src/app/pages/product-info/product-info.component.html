@@ -12,8 +12,8 @@
           {{ product()!.price_in_cents | real }}
         </p>
         <p class="product-info__details-freight">
-          * Frete de R$40,00 para todo o Brasil. Grátis para compras acima de
-          R$900,00.
+          * Frete de {{ freightValue | real }} para todo o Brasil. Grátis para
+          compras acima de {{ freeFreightValue | real }}.
         </p>
         <p class="product-info__details-description">Descriçao:</p>
         <p>{{ product()?.description }}</p>

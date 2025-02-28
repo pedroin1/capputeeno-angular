@@ -13,6 +13,10 @@ import { Router } from '@angular/router';
 import { RealPipe } from '../../pipes/real.pipe';
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  FREE_FREIGHT_VALUE,
+  FREIGHT_VALUE,
+} from '../../constants/product-freight';
 
 @Component({
   selector: 'app-product-info',
@@ -24,6 +28,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ProductInfoComponent implements OnInit {
   protected product = signal<IProduct | null>(null);
+
+  protected readonly freightValue = FREIGHT_VALUE;
+
+  protected readonly freeFreightValue = FREE_FREIGHT_VALUE;
 
   constructor(
     private productService: ProductService,

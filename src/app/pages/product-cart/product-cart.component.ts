@@ -14,6 +14,10 @@ import { AsyncPipe } from '@angular/common';
 import { CardProductCartComponent } from '../../components/card-product-cart/card-product-cart.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToastrService } from 'ngx-toastr';
+import {
+  FREE_FREIGHT_VALUE,
+  FREIGHT_VALUE,
+} from '../../constants/product-freight';
 
 @Component({
   selector: 'app-product-cart',
@@ -25,6 +29,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductCartComponent implements OnInit {
   protected totalValue = signal<number>(0);
+
+  protected readonly freightValue = FREIGHT_VALUE;
+
+  protected readonly freeFreightValue = FREE_FREIGHT_VALUE;
 
   protected totalValueWithFreight = computed(() => {
     if (this.totalValue() > 0) {
@@ -45,7 +53,6 @@ export class ProductCartComponent implements OnInit {
   protected onHandleBuyItems() {
     try {
       this.toastService.success('Compra finalizada com sucesso!');
-
       setTimeout(() => {
         this.cartService.finishBuy();
         this.router.navigate(['/']);
