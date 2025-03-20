@@ -19,9 +19,13 @@ export class ProductService {
     private filterService: FilterService,
   ) {}
 
-  public GetProducts(page: number): Observable<ProductQueryResult> {
+  public GetProducts(
+    page: number,
+    organizeFor: OrganizeForType,
+  ): Observable<ProductQueryResult> {
+    const { field, order } = this.filterService.getFieldByPriority(organizeFor);
     return this.apollo.watchQuery<{ allProducts: IProduct[] }>({
-      query: GET_PRODUCTS(page),
+      query: GET_PRODUCTS(page, field, order),
     }).valueChanges;
   }
 
@@ -30,8 +34,6 @@ export class ProductService {
     productType: ProductType,
     organizeFor: OrganizeForType,
   ) {
-    console.log(page, productType, organizeFor);
-
     const queryFilter = productType.toString().toLowerCase();
     const { field, order } = this.filterService.getFieldByPriority(organizeFor);
 

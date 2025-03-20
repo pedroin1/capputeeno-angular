@@ -105,7 +105,7 @@ export class FilterService {
       default:
         return {
           field: 'saled',
-          order: 'DSC',
+          order: 'DESC',
         };
     }
   }

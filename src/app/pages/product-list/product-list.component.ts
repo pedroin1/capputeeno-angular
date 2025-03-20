@@ -14,7 +14,7 @@ import { FilterService } from '../../services/filter.service';
 import { IProductFilter } from '../../entities/product-filter';
 import { IOrganizeForFilter } from '../../entities/organize-filter';
 import { IPageFilter } from '../../entities/page-filter';
-import { combineLatest, switchMap } from 'rxjs';
+import { combineLatest, debounceTime, switchMap } from 'rxjs';
 import { ProductQueryResult } from '../../entities/product-query';
 
 @Component({
@@ -47,9 +47,13 @@ export class ProductListComponent implements OnInit {
     combinedObservables$
       .pipe(
         takeUntilDestroyed(this.destroyRef),
+        debounceTime(100),
         switchMap(([pageFilter, productFilter, organizeForFilter]) =>
           productFilter.type === 'ALL'
-            ? this.productService.GetProducts(pageFilter.page)
+            ? this.productService.GetProducts(
+                pageFilter.page,
+                organizeForFilter.type,
+              )
             : this.productService.GetProductsWithFilter(
                 pageFilter.page,
                 productFilter.type,
