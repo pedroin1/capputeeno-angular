@@ -23,13 +23,11 @@ export class FilterService {
   ];
 
   private paginationOrder: IPageFilter[] = [
-    { page: '1', selected: true },
-    { page: '2', selected: false },
-    { page: '3', selected: false },
-    { page: '4', selected: false },
-    { page: '5', selected: false },
-    { page: '<', selected: false },
-    { page: '>', selected: false },
+    { page: 1, selected: true },
+    { page: 2, selected: false },
+    { page: 3, selected: false },
+    { page: 4, selected: false },
+    { page: 5, selected: false },
   ];
 
   public searchedProduct$ = new Subject<string>();

@@ -90,7 +90,7 @@
     background-color: var(--primary-light-2);
     cursor: pointer;
 
-    &:hover {
+    &:not(.page-selected):hover {
       color: var(--primary-dark-1);
     }
   }

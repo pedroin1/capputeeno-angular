@@ -11,6 +11,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CardProductComponent } from '../../components/card-product/card-product.component';
 import { IProduct } from '../../entities/product';
 import { FilterService } from '../../services/filter.service';
+import { IProductFilter } from '../../entities/product-filter';
+import { IOrganizeForFilter } from '../../entities/organize-filter';
+import { IPageFilter } from '../../entities/page-filter';
+import { combineLatest, switchMap } from 'rxjs';
+import { ProductQueryResult } from '../../entities/product-query';
 
 @Component({
   selector: 'app-products-list',
@@ -21,7 +26,7 @@ import { FilterService } from '../../services/filter.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent implements OnInit {
-  productList: IProduct[] = [];
+  protected productList: IProduct[] = [];
 
   constructor(
     private productService: ProductService,
@@ -31,24 +36,30 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   private getProducts() {
-    this.filterService.selectedProduct$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((filter) => {
-        if (filter.type === 'ALL') {
-          this.productService.GetProducts().subscribe((result) => {
-            this.productList = result.data.allProducts;
-            this.changeDetectorRef.detectChanges();
-          });
-        } else {
-          this.filterService.selectedOrganizeFor$.subscribe((result) => {
-            this.productService
-              .GetProductsWithFilter(filter.type, result.type)
-              .subscribe((result) => {
-                this.productList = result.data.allProducts;
-                this.changeDetectorRef.detectChanges();
-              });
-          });
-        }
+    const combinedObservables$ = combineLatest<
+      [IPageFilter, IProductFilter, IOrganizeForFilter]
+    >([
+      this.filterService.selectedPage$,
+      this.filterService.selectedProduct$,
+      this.filterService.selectedOrganizeFor$,
+    ]);
+
+    combinedObservables$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap(([pageFilter, productFilter, organizeForFilter]) =>
+          productFilter.type === 'ALL'
+            ? this.productService.GetProducts(pageFilter.page)
+            : this.productService.GetProductsWithFilter(
+                pageFilter.page,
+                productFilter.type,
+                organizeForFilter.type,
+              ),
+        ),
+      )
+      .subscribe((result: ProductQueryResult) => {
+        this.productList = result.data.allProducts;
+        this.changeDetectorRef.detectChanges();
         this.changeDetectorRef.markForCheck();
       });
   }
