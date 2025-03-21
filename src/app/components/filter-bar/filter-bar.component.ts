@@ -1,9 +1,16 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FilterService } from '../../services/filter.service';
 import { IProductFilter } from '../../entities/product-filter';
 import { IOrganizeForFilter } from '../../entities/organize-filter';
 import { IPageFilter } from '../../entities/page-filter';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-filter-bar',
@@ -14,31 +21,36 @@ import { IPageFilter } from '../../entities/page-filter';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterBarComponent implements OnInit {
-  productItems: IProductFilter[] = [];
-  organizeForItems: IOrganizeForFilter[] = [];
-  paginationItems: IPageFilter[] = [];
-  isOpenMenu: boolean = false;
+  protected productItems: IProductFilter[] = [];
+  protected organizeForItems: IOrganizeForFilter[] = [];
+  protected paginationItems: IPageFilter[] = [];
 
-  constructor(private filterService: FilterService) {}
+  protected isMenuOpened = signal<boolean>(false);
+  protected organizeForSelected = signal<string>('');
+
+  constructor(
+    protected filterService: FilterService,
+    private destroyRef: DestroyRef,
+  ) {}
 
   public openMenu() {
-    this.isOpenMenu = !this.isOpenMenu;
+    this.isMenuOpened.set(true);
   }
 
   public closeMenu() {
-    this.isOpenMenu = false;
+    this.isMenuOpened.set(false);
   }
 
-  public onToogleProduct(item: IProductFilter) {
-    this.filterService.toggleProduct(item);
+  public onToogleProduct(product: IProductFilter) {
+    this.filterService.toggleProduct(product);
     this.closeMenu();
   }
-  public onToogleOrganizeFor(item: IOrganizeForFilter) {
-    this.filterService.toggleOrganizeFor(item);
+  public onToogleOrganizeFor(organizeFor: IOrganizeForFilter) {
+    this.filterService.toggleOrganizeFor(organizeFor);
     this.closeMenu();
   }
-  public onTooglePage(item: IPageFilter) {
-    this.filterService.togglePage(item);
+  public onTooglePage(page: IPageFilter) {
+    this.filterService.togglePage(page);
     this.closeMenu();
   }
 
@@ -46,5 +58,11 @@ export class FilterBarComponent implements OnInit {
     this.productItems = this.filterService.getProductItems();
     this.organizeForItems = this.filterService.getOrganizeForItems();
     this.paginationItems = this.filterService.getPaginationItems();
+
+    this.filterService.selectedOrganizeFor$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((organizeForFilter: IOrganizeForFilter) =>
+        this.organizeForSelected.set(organizeForFilter.name),
+      );
   }
 }

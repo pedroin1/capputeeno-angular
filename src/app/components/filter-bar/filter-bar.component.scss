@@ -38,20 +38,28 @@
   @include flex-custom(column, flex-start, flex-end, 8px, wrap);
 }
 
-.organize_for_button {
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  width: fit-content;
-  cursor: pointer;
-  @include flex-custom(row, center, center, 4px, nowrap);
+.organize_for {
+  @include flex-custom(column, flex-end, flex-end, 0px);
+  &__button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    width: fit-content;
+    cursor: pointer;
+    @include flex-custom(row, center, center, 4px, nowrap);
+  }
 
-  &-text {
+  &__text {
     color: var(--primary);
 
     &:hover {
       color: var(--primary-dark-1);
     }
+  }
+
+  &__selected {
+    color: var(--primary);
+    font-size: 12px;
   }
 }
 
@@ -66,13 +74,21 @@
   top: 25%;
   @include flex-custom(column, flex-start, flex-start, 8px, nowrap);
 
-  li {
+  &__item {
     cursor: pointer;
+
+    &-selected {
+      font-weight: 700;
+    }
 
     &:hover {
       text-decoration: underline;
     }
   }
+}
+
+.rotate-arrow {
+  transform: rotate(180deg);
 }
 
 .pagination_filter {

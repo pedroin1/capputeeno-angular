@@ -9,19 +9,34 @@
   }
 </ul>
 <section class="right_menu_filter">
-  <button class="organize_for_button" (click)="openMenu()">
-    <span class="organize_for_button-text">Organizar por</span>
-    <img src="assets/svg/arrow-down.svg" alt="" />
-  </button>
-  @if (isOpenMenu) {
-    <ul class="priority_list">
-      @for (organizeFor of organizeForItems; track $index) {
-        <li (click)="onToogleOrganizeFor(organizeFor)">
-          {{ organizeFor.name }}
-        </li>
-      }
-    </ul>
-  }
+  <div class="organize_for">
+    <button class="organize_for__button" (click)="openMenu()">
+      <span class="organize_for__text">Organizar por</span>
+      <img
+        [ngClass]="{ 'rotate-arrow': isMenuOpened() }"
+        src="assets/svg/arrow-down.svg"
+        alt=""
+      />
+    </button>
+    @if (organizeForSelected() !== "Novidades") {
+      <i class="organize_for__selected"
+        >Selecionado: <b>{{ organizeForSelected() }}</b></i
+      >
+    }
+    @if (isMenuOpened()) {
+      <ul class="priority_list">
+        @for (organizeFor of organizeForItems; track $index) {
+          <li
+            class="priority_list__item"
+            [ngClass]="{ 'priority_list__item-selected': organizeFor.selected }"
+            (click)="onToogleOrganizeFor(organizeFor)"
+          >
+            {{ organizeFor.name }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
   <ul class="pagination_filter">
     @for (page of paginationItems; track $index) {
       <li
