@@ -7,7 +7,7 @@
   min-width: 350px;
   height: 80px;
   padding: 0 194px;
-  background: var(--white);
+  background-color: var(--white);
   @include flex-custom(row, space-between, center, 8px, nowrap);
 
   h1 {
