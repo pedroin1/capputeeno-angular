@@ -10,9 +10,14 @@
 html,
 body {
   max-width: 100vw;
-  height: 100vh;
   background: var(--secondary);
   color: var(--primary);
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 p,

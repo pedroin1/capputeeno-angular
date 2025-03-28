@@ -3,9 +3,10 @@
 
 :host {
   height: 100%;
+  padding: 24px;
   max-height: 150px;
   background-color: var(--white);
-  margin-top: 4rem;
+  margin-top: auto;
   @include flex-custom(column, center, center, 16px);
 }
 

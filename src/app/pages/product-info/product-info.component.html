@@ -17,7 +17,9 @@
           compras acima de {{ freeFreightValue | real }}.
         </p>
         <p class="product-info__details-description">Descriçao:</p>
-        <p>{{ product()?.description }}</p>
+        <p class="product-info__details-text">
+          {{ product()?.description }}
+        </p>
       </div>
       <button
         class="product-info__details-button"
