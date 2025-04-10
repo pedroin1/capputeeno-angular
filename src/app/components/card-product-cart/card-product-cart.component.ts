@@ -10,12 +10,11 @@ import { ICart } from '../../entities/cart';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-card-product-cart',
-  standalone: true,
-  imports: [RealPipe, ReactiveFormsModule],
-  templateUrl: './card-product-cart.component.html',
-  styleUrl: './card-product-cart.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-card-product-cart',
+    imports: [RealPipe, ReactiveFormsModule],
+    templateUrl: './card-product-cart.component.html',
+    styleUrl: './card-product-cart.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardProductCartComponent implements OnInit {
   public cartItem = input.required<ICart>();

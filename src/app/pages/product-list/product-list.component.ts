@@ -18,12 +18,11 @@ import { combineLatest, debounceTime, switchMap } from 'rxjs';
 import { ProductQueryResult } from '../../entities/product-query';
 
 @Component({
-  selector: 'app-products-list',
-  standalone: true,
-  imports: [FilterBarComponent, CardProductComponent],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-products-list',
+    imports: [FilterBarComponent, CardProductComponent],
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent implements OnInit {
   protected productList: IProduct[] = [];

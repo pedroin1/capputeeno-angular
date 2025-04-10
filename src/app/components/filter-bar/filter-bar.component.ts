@@ -14,7 +14,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-filter-bar',
-  standalone: true,
   imports: [NgClass],
   templateUrl: './filter-bar.component.html',
   styleUrl: './filter-bar.component.scss',

@@ -20,12 +20,11 @@ import {
 } from '../../constants/product-freight';
 
 @Component({
-  selector: 'app-product-cart',
-  standalone: true,
-  imports: [CardProductCartComponent, BackButtonComponent, RealPipe, AsyncPipe],
-  templateUrl: './product-cart.component.html',
-  styleUrl: './product-cart.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-product-cart',
+    imports: [CardProductCartComponent, BackButtonComponent, RealPipe, AsyncPipe],
+    templateUrl: './product-cart.component.html',
+    styleUrl: './product-cart.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductCartComponent implements OnInit {
   protected totalValue = signal<number>(0);

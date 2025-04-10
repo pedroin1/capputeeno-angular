@@ -20,12 +20,11 @@ import {
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-product-info',
-  standalone: true,
-  imports: [RealPipe, BackButtonComponent],
-  templateUrl: './product-info.component.html',
-  styleUrl: './product-info.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-product-info',
+    imports: [RealPipe, BackButtonComponent],
+    templateUrl: './product-info.component.html',
+    styleUrl: './product-info.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductInfoComponent implements OnInit {
   protected product = signal<IProduct | null>(null);

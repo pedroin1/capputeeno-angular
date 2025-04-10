@@ -5,12 +5,11 @@ import { ProductService } from '../../services/product.service';
 import { RealPipe } from '../../pipes/real.pipe';
 
 @Component({
-  selector: 'app-card-product',
-  standalone: true,
-  imports: [RealPipe],
-  templateUrl: './card-product.component.html',
-  styleUrl: './card-product.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-card-product',
+    imports: [RealPipe],
+    templateUrl: './card-product.component.html',
+    styleUrl: './card-product.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardProductComponent {
   @Input({ required: true }) product!: IProduct;
