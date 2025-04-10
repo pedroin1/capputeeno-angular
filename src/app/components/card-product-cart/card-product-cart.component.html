@@ -27,7 +27,7 @@
           class="product-cart__info-footer-select"
           [formControl]="quantityFormControl"
         >
-          @for (option of options; track $index) {
+          @for (option of options(); track $index) {
             <option [ngValue]="option" [selected]="option === cartItem().count">
               {{ option }}
             </option>

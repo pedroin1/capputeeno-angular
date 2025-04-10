@@ -4,6 +4,7 @@ import {
   Component,
   DestroyRef,
   OnInit,
+  signal,
 } from '@angular/core';
 import { FilterBarComponent } from '../../components/filter-bar/filter-bar.component';
 import { ProductService } from '../../services/product.service';
@@ -18,14 +19,14 @@ import { combineLatest, debounceTime, switchMap } from 'rxjs';
 import { ProductQueryResult } from '../../entities/product-query';
 
 @Component({
-    selector: 'app-products-list',
-    imports: [FilterBarComponent, CardProductComponent],
-    templateUrl: './product-list.component.html',
-    styleUrl: './product-list.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-products-list',
+  imports: [FilterBarComponent, CardProductComponent],
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent implements OnInit {
-  protected productList: IProduct[] = [];
+  protected productList = signal<IProduct[]>([]);
 
   constructor(
     private productService: ProductService,
@@ -61,7 +62,7 @@ export class ProductListComponent implements OnInit {
         ),
       )
       .subscribe((result: ProductQueryResult) => {
-        this.productList = result.data.allProducts;
+        this.productList.set(result.data.allProducts);
         this.changeDetectorRef.detectChanges();
         this.changeDetectorRef.markForCheck();
       });
@@ -70,10 +71,10 @@ export class ProductListComponent implements OnInit {
   private filterProductsByInputSearch() {
     this.filterService.searchedProduct$.subscribe((result) => {
       if (result !== '') {
-        const filteredListByInput = this.productList.filter((product) =>
+        const filteredListByInput = this.productList().filter((product) =>
           product.name.includes(result),
         );
-        this.productList = filteredListByInput;
+        this.productList.set(filteredListByInput);
         this.changeDetectorRef.markForCheck();
       } else {
         this.getProducts();

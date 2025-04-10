@@ -1,5 +1,5 @@
 <ul class="list_itens">
-  @for (product of productItems; track $index) {
+  @for (product of productItems(); track $index) {
     <li
       [ngClass]="{ 'item-list-selected': product.selected }"
       (click)="onToogleProduct(product)"
@@ -25,7 +25,7 @@
     }
     @if (isMenuOpened()) {
       <ul class="priority_list">
-        @for (organizeFor of organizeForItems; track $index) {
+        @for (organizeFor of organizeForItems(); track $index) {
           <li
             class="priority_list__item"
             [ngClass]="{ 'priority_list__item-selected': organizeFor.selected }"
@@ -38,7 +38,7 @@
     }
   </div>
   <ul class="pagination_filter">
-    @for (page of paginationItems; track $index) {
+    @for (page of paginationItems(); track $index) {
       <li
         [ngClass]="{ 'page-selected': page.selected }"
         (click)="onTooglePage(page)"

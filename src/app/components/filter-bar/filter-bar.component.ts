@@ -20,10 +20,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterBarComponent implements OnInit {
-  protected productItems: IProductFilter[] = [];
-  protected organizeForItems: IOrganizeForFilter[] = [];
-  protected paginationItems: IPageFilter[] = [];
-
+  protected productItems = signal<IProductFilter[]>([]);
+  protected organizeForItems = signal<IOrganizeForFilter[]>([]);
+  protected paginationItems = signal<IPageFilter[]>([]);
   protected isMenuOpened = signal<boolean>(false);
   protected organizeForSelected = signal<string>('');
 
@@ -53,10 +52,14 @@ export class FilterBarComponent implements OnInit {
     this.closeMenu();
   }
 
+  private setupFilters() {
+    this.productItems.set(this.filterService.getProductItems());
+    this.organizeForItems.set(this.filterService.getOrganizeForItems());
+    this.paginationItems.set(this.filterService.getPaginationItems());
+  }
+
   ngOnInit(): void {
-    this.productItems = this.filterService.getProductItems();
-    this.organizeForItems = this.filterService.getOrganizeForItems();
-    this.paginationItems = this.filterService.getPaginationItems();
+    this.setupFilters();
 
     this.filterService.selectedOrganizeFor$
       .pipe(takeUntilDestroyed(this.destroyRef))

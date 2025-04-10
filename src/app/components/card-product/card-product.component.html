@@ -1,16 +1,16 @@
-@if (product) {
-  <div class="card_product" (click)="onHandleNavigate(product)">
+@if (product()) {
+  <div class="card_product" (click)="onHandleNavigate(product())">
     <img
       class="card_product__image"
-      [src]="product.image_url"
+      [src]="product().image_url"
       alt="product_image"
       width="236"
       height="300"
     />
     <div class="card_product__info">
-      <span class="card_product__info__title">{{ product.name }}</span>
+      <span class="card_product__info__title">{{ product().name }}</span>
       <span class="card_product__info__price">{{
-        product.price_in_cents | real
+        product().price_in_cents | real
       }}</span>
     </div>
   </div>

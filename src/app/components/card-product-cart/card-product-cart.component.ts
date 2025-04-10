@@ -3,6 +3,7 @@ import {
   Component,
   input,
   OnInit,
+  signal,
 } from '@angular/core';
 import { RealPipe } from '../../pipes/real.pipe';
 import { CartService } from '../../services/cart.service';
@@ -10,18 +11,18 @@ import { ICart } from '../../entities/cart';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-card-product-cart',
-    imports: [RealPipe, ReactiveFormsModule],
-    templateUrl: './card-product-cart.component.html',
-    styleUrl: './card-product-cart.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-card-product-cart',
+  imports: [RealPipe, ReactiveFormsModule],
+  templateUrl: './card-product-cart.component.html',
+  styleUrl: './card-product-cart.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardProductCartComponent implements OnInit {
   public cartItem = input.required<ICart>();
 
   protected quantityFormControl!: FormControl<number | null>;
 
-  protected options = [1, 2, 3, 4, 5];
+  protected options = signal<number[]>([1, 2, 3, 4, 5]);
 
   constructor(private cartService: CartService) {}
 
